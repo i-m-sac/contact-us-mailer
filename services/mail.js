@@ -14,7 +14,7 @@ module.exports.sendMail = async (req) => {
     throw new Error('Empty request body')
   }
   const { from, name, subject, message } = req.body
-  if (!(from && name && subject && message)) {
+  if (!(from && name && message)) {
     throw new Error('Missing mandatory params')
   }
   const mailOptions = {
