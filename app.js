@@ -1,16 +1,17 @@
-var createError = require('http-errors');
-var express = require('express');
+require('dotenv').config()
+const createError = require('http-errors');
+const express = require('express');
 const { Router } = require('express')
 const { json, urlencoded, text } = require('body-parser')
-var path = require('path');
-var cookieParser = require('cookie-parser');
-var logger = require('morgan');
+const path = require('path');
+const cookieParser = require('cookie-parser');
+const logger = require('morgan');
 
 const cors = require('cors')
-var routes = require('./routes');
+const routes = require('./routes');
 
 const router = Router()
-var app = express();
+const app = express();
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));

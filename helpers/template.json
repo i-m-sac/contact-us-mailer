@@ -1,0 +1,4 @@
+{
+    "subject": "__name__ : __subject__",
+    "body": "<div> <p> Hey, <br> <br> You have an enquiry from <b>__name__</b> on your website <br> <br> <b>Email</b>: __email__ <br> <b>Message</b>: <br> __message__ </p> </div>"
+}

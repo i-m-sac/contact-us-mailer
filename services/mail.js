@@ -1,4 +1,5 @@
 const nodemailer = require('nodemailer')
+const template = require('../helpers/template.json')
 const smtpTransport = nodemailer.createTransport({
   service: 'gmail',
   auth: {
@@ -13,18 +14,20 @@ module.exports.sendMail = async (req) => {
     throw new Error('Empty request body')
   }
   const { from, name, subject, message } = req.body
-  if (!(from || name || subject || message)) {
+  if (!(from && name && subject && message)) {
     throw new Error('Missing mandatory params')
   }
   const mailOptions = {
-    from,
+    from: process.env.EMAIL_USER,
     to: process.env.EMAIL_RECIPIENT,
-    subject: `${name} : ${subject}`,
-    text: message
+    subject: template.subject.replace('__name__', name).replace('__subject__', subject),
+    html: template.body.replace('__name__', name).replace('__email__', from).replace('__message__', message),
+    replyTo: from
   }
   const response = await smtpTransport.sendMail(mailOptions).catch(err => {
     console.log('Err in sending mail', err)
     throw err
   })
+  console.log('Mail sent', response)
   return response
 }
